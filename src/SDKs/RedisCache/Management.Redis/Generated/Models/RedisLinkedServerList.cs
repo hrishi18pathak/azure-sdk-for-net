@@ -11,32 +11,33 @@ namespace Microsoft.Azure.Management.Redis.Models
     using Microsoft.Azure;
     using Microsoft.Azure.Management;
     using Microsoft.Azure.Management.Redis;
+    using Microsoft.Rest;
     using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
-    /// Specifies which Redis access keys to reset.
+    /// List of linked server Ids of a Redis cache.
     /// </summary>
-    public partial class RedisRegenerateKeyParameters
+    public partial class RedisLinkedServerList
     {
         /// <summary>
-        /// Initializes a new instance of the RedisRegenerateKeyParameters
-        /// class.
+        /// Initializes a new instance of the RedisLinkedServerList class.
         /// </summary>
-        public RedisRegenerateKeyParameters()
+        public RedisLinkedServerList()
         {
           CustomInit();
         }
 
         /// <summary>
-        /// Initializes a new instance of the RedisRegenerateKeyParameters
-        /// class.
+        /// Initializes a new instance of the RedisLinkedServerList class.
         /// </summary>
-        /// <param name="keyType">The Redis access key to regenerate. Possible
-        /// values include: 'Primary', 'Secondary'</param>
-        public RedisRegenerateKeyParameters(RedisKeyType keyType)
+        /// <param name="value">List of linked server Ids of a Redis
+        /// cache.</param>
+        public RedisLinkedServerList(IList<RedisLinkedServer> value)
         {
-            KeyType = keyType;
+            Value = value;
             CustomInit();
         }
 
@@ -46,20 +47,23 @@ namespace Microsoft.Azure.Management.Redis.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets the Redis access key to regenerate. Possible values
-        /// include: 'Primary', 'Secondary'
+        /// Gets or sets list of linked server Ids of a Redis cache.
         /// </summary>
-        [JsonProperty(PropertyName = "keyType")]
-        public RedisKeyType KeyType { get; set; }
+        [JsonProperty(PropertyName = "value")]
+        public IList<RedisLinkedServer> Value { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
+            if (Value == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "Value");
+            }
         }
     }
 }
