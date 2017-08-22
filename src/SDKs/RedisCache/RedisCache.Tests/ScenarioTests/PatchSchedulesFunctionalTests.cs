@@ -85,8 +85,8 @@ namespace AzureRedisCache.Tests
             Assert.Contains(redisName + "/patchSchedules/default", schedulesSet.Id);
             Assert.Contains(redisName + "/default", schedulesSet.Name);
             Assert.Contains("Microsoft.Cache/Redis/PatchSchedules", schedulesSet.Type);
-            Assert.Equal(2, schedulesSet.ScheduleEntries.Count);
-            foreach (var schedule in schedulesSet.ScheduleEntries)
+            Assert.Equal(2, schedulesSet.ScheduleEntriesProperty.Count);
+            foreach (var schedule in schedulesSet.ScheduleEntriesProperty)
             {
                 if (schedule.DayOfWeek.Equals(DayOfWeekEnum.Monday))
                 {
